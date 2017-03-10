@@ -144,6 +144,11 @@ void OpenMvgParser::parsePoints() {
     sfm_data_.point2DoncamViewingPoint_.assign(sfm_data_.numPoints_, std::vector<glm::vec2>());
     sfm_data_.pointsVisibleFromCamN_.assign(sfm_data_.numCameras_, std::vector<int>());
     sfm_data_.points_.assign(sfm_data_.numPoints_, glm::vec3());
+
+    // custom modification
+    sfm_data_.camViewing2DPoint_.assign(sfm_data_.numCameras_, std::vector<glm::vec2>());
+
+
     if (!structure.IsArray())
       throw JsonAccessException("JsonAccessException--> error while querying structure.IsArray()");
 
@@ -205,6 +210,8 @@ void OpenMvgParser::parsePoints() {
 
         const rapidjson::Value& pt2D = observations[curId]["value"]["x"];
         sfm_data_.point2DoncamViewingPoint_[curPoint].push_back(glm::vec2(pt2D[0].GetDouble(), pt2D[1].GetDouble()));
+
+        sfm_data_.camViewing2DPoint_[curCam].push_back(glm::vec2(pt2D[0].GetDouble(), pt2D[1].GetDouble()));
       }
     }
   } catch (JsonAccessException& e) {
