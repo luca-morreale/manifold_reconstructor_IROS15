@@ -25,7 +25,8 @@ struct SfMData {
   std::vector<std::vector<int> > pointsVisibleFromCamN_;    // each list contains the index of points that are seen from that cam
   std::vector<std::vector<glm::vec2> > point2DoncamViewingPoint_;   // a list for each 3D point, each one contains the 2D observations
 
-    std::vector<std::vector<glm::vec2> > camViewing2DPoint_;   // a list for each cam, each one contains the 2D observations
+  std::vector<std::vector<glm::vec2> > camViewing2DPoint_;    // list of observations (2D points) for each camera
+  std::vector<std::map<int, glm::vec2> > point3DTo2DThroughCam_;   // maps points 3D to 2D through cam
 
   int imageWidth_, imageHeight_;
 };
